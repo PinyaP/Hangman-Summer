@@ -1,0 +1,14 @@
+NORMAL|50
+cook
+student
+doctor
+singer
+teacher
+HARD|150
+photographer
+technician
+shopkeeper
+hairdresser
+LEGENDARY|200
+accountant
+janitor
