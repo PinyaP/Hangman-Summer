@@ -20,17 +20,16 @@ def login():
     login_window.title("L O G I N")
     login_window.geometry("550x260+350+200")
     login_window.resizable(0, 0)
-    canvas_login = Canvas(login_window)
+    canvas_login = Canvas(login_window,bg="#191970")
     canvas_login.pack(fill="both", expand=True)
-    canvas_login.create_image(0, 0, image=bg_login, anchor="nw")
 
-    canvas_login.create_text(270, 50, text="Enter Your Name",fill="yellow", font="Forte 26 bold",justify="center")
-    canvas_login.create_text(272, 50, text="Enter Your Name",fill="red", font="Forte 26 bold",justify="center")
-    enter_name = Entry(canvas_login, width=16, font="Forte 26 bold", justify="center", bg="#df91fa") #ช่องที่ให้ผู้ใช้กรอกชื่อ
+    canvas_login.create_text(270, 50, text="Enter Your Name",fill="white", font="Times 26 bold",justify="center")
+    canvas_login.create_text(272, 50, text="Enter Your Name",fill="red", font="Times 26 bold",justify="center")
+    enter_name = Entry(canvas_login, width=16, font="Times 26 bold", justify="center", bg="#df91fa") #ช่องที่ให้ผู้ใช้กรอกชื่อ
     canvas_login.create_window(270, 100, window=enter_name)
     
-    start_button = Button(login_window, text="S T A R T", height=1, width=20, command=start_game, state=NORMAL, font="Forte 16")
-    button_exit_login = Button(login_window, text="E X I T",fg = "red", height=1, width=20, command=lambda:buttonExit(login_window), state=NORMAL, font="Forte 16")
+    start_button = Button(login_window, text="S T A R T", height=1, width=24, command=start_game, state=NORMAL,relief="raised", background='white')
+    button_exit_login = Button(login_window, text="E X I T",fg = "red", height=1, width=24, command=lambda:buttonExit(login_window), state=NORMAL,relief="raised", background='white')
     
     start_button.place(x=270, y=160, anchor="center")
     button_exit_login.place(x=270, y=200, anchor="center")
@@ -62,29 +61,27 @@ def score_board():
 mainGUI = Tk()                                                           
 mainGUI.geometry("640x480+300+200")                                              
 mainGUI.resizable(0, 0)                                           #ไม่่สามารถปรับหน้าจอเองได้
+
 mainGUI.title("H  A  N  G  M  A  N")                           
 
-user_name = ""                                                    #User name
-bg_main = PhotoImage(file="menu.png")                              
-bg_score = PhotoImage(file="score board.png")                             
-bg_login = PhotoImage(file="login.png")              
+user_name = ""                                                    #User name                           
+bg_score = PhotoImage(file="score board.png")                                
 bg_game = PhotoImage(file="game.png")                               
 bg_logo = PhotoImage(file="hanged.png")
 
-canvas_main = Canvas(mainGUI,width=640, height=480)                                #เป็นการวาดรูปสร้างออปเจ็กขึ้นมาทับที่mainGUI            
-canvas_main.pack(fill="both", expand=True)                                
-canvas_main.create_image(0, 0, image=bg_main, anchor="nw")                
+canvas_main = Canvas(mainGUI,width=640, height=480,bg= '#E7FFFF')                                #เป็นการวาดรูปสร้างออปเจ็กขึ้นมาทับที่mainGUI            
+canvas_main.pack(fill="both", expand=True)                                            
 
-canvas_main.create_text(320, 35, text="Welcome to HANGMAN GAME", fill="yellow", font="Forte 38 bold", justify="center", anchor="n")
-canvas_main.create_text(323, 35, text="Welcome to HANGMAN GAME", fill="red", font="Forte 38 bold", justify="center", anchor="n")
+canvas_main.create_text(320, 35, text="HANGMAN GAME", fill="yellow", font="Forte 34 bold", justify="center", anchor="n")
+canvas_main.create_text(323, 35, text="HANGMAN GAME", fill="red", font="Forte 34 bold", justify="center", anchor="n")
 canvas_main.create_image(190, 75, image=bg_logo, anchor="nw")   
 
-button_newgame = Button(canvas_main, text="N E W   G A M E", height=2, width=26, command=login, state=NORMAL, font="Helvetica 16" ,highlightbackground='pink',foreground='green', background='black', highlightthickness=5,activebackground = "blue",activeforeground="yellow") #New Game Button
-button_score = Button(canvas_main, text="L E A D E R   B O A R D", height=2, width=26, command=score_board, state=NORMAL, font="Forte 16",foreground='green', background='black',activebackground = "blue")   #Score Button
-button_exit = Button(canvas_main, text="E X I T", height=2, width=26, command= mainGUI.destroy, state=NORMAL, font="Forte 16",fg="red")   #Exit Button
+button_newgame = Button(canvas_main, text="N E W   G A M E",font="Times 12", height=2, width=28, command=login, state=NORMAL ,foreground='green', background='white',activebackground = "#191970",activeforeground="yellow",relief="raised") #New Game Button
+button_score = Button(canvas_main, text="L E A D E R   B O A R D",  font="Times 12",height=2, width=28, command=score_board, state=NORMAL,foreground='green', background='white',activebackground = "#191970",activeforeground="yellow",relief="raised")   #Score Button
+button_exit = Button(canvas_main, text="E X I T", height=2, width=28, font="Times 12",command= mainGUI.destroy, state=NORMAL,fg="red",relief="raised",background='white')   #Exit Button
 
 button_newgame.place(x=320, y=280, anchor="center")      
-button_score.place(x=320, y=350, anchor="center")        
-button_exit.place(x=320, y=420, anchor="center")  
+button_score.place(x=320, y=340, anchor="center")        
+button_exit.place(x=320, y=400, anchor="center")  
       
 mainGUI.mainloop()    
