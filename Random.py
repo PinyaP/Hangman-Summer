@@ -20,6 +20,7 @@ else:
 
 index = random.randint(level[randomLv] ,index_stop)
 print(index)
+#กรณีindexไปทับกับบรรทัด level
 if index in [0,6,11]:
     index +=1 
 
