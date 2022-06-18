@@ -3,17 +3,17 @@ import random
 print("")
 
 #____________________ Random catagory ____________________ 
-category = ["animal.txt", "food.txt", "fruit.txt", "occupation.txt", "place.txt"]
-ranInCat = random.randint(0, 4) # Random index of category.
-wordsFile = open(category[ranInCat]) # Open file by follow random index of category(ranInCat).
-wordlist = wordsFile.readlines() # All posible word from wordsFile.
+category = ["animal", "food", "fruit", "occupation", "place"]
+fileName = random.choice(category)
+wordsFile = open(fileName+".txt", 'r') # Open file by follow the random index of category(ranInCat).
+wordlist = wordsFile.readlines() # All possible word from wordsFile.
 
 # Print to check.
-print("File name: " + category[ranInCat])
+print("Category: " + fileName)
 
 #____________________ Random Level ____________________ 
 level = ["NORMAL|50", "HARD|150", "LEGENDARY|200"]
-randomLv = random.choice(level) # Random level by choice
+randomLv = random.choice(level) # Random level by choice.
 
 # Index Level
 nIndex = [1,2,3,4,5] # Index of normal level words.
@@ -25,7 +25,7 @@ lIndex = [12,13] # Index of Legendary level words.
 print("Level: " + randomLv)
 
 #____________________ Random word ____________________ 
-for i in wordlist: # run all posible word.
+for i in wordlist: # run all possible word.
 
     i = i.strip("\n").strip("\r") # Delete \n and \r (return).
 
@@ -33,10 +33,10 @@ for i in wordlist: # run all posible word.
     if i == randomLv:
 
         if i == "NORMAL|50":
-            ran = random.choice(nIndex) 
+            ran = random.choice(nIndex)  # Random index of those level.
             point = 50
-            word = str(wordlist[ran]).strip("\n").strip("\r")
-            print("indexline: "+str(ran+1))
+            word = str(wordlist[ran]).strip("\n").strip("\r") # Random word from random category wordlist.
+            print("indexline: "+str(ran+1)) # Print to check indexline (ran + 1 for people easy to find word on file).
             
         elif i == "HARD|150":
             ran = random.choice(hIndex)
