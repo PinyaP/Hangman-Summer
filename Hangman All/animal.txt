@@ -1,0 +1,14 @@
+NORMAL|50
+horse
+duck
+elephant
+buffalo
+zebra
+HARD|150
+kangaroo
+peacock
+hawk
+crocodile
+LEGENDARY|200
+vulture
+ostrich

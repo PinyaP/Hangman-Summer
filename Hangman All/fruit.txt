@@ -1,0 +1,14 @@
+NORMAL|50
+apple
+grape
+orange
+mango
+banana
+HARD|150
+raspberry
+papaya
+strawberry
+pineapple
+LEGENDARY|200
+jambul
+southern langsat
