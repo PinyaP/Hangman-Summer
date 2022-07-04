@@ -68,13 +68,13 @@ def score_board():
     button_exit_score.place(x=200, y=580, anchor="center")
 
 def hangman():
-    
     global the_word_withSpaces
     global wordscore
     global word
     global file_name
     global user_score
     global hangman_game
+    global user_name
                    
     game_window = Toplevel(mainGUI)
     game_window.geometry('915x700')
@@ -94,16 +94,10 @@ def hangman():
     hangman_game.create_text(757,30,text=("Word Score:" + str(wordscore)),fill="black",font=(None,20))
     hangman_game.create_text(757,75,text=("Category: " + file_name),fill="black",font=(None,20))
     
-    x=500
-    if x+(len(word)*30) > 915:
-        x = 300
-    else:
-        x = 500
-    
     lblWord = StringVar()
     the_word_withSpaces=" ".join(word)
     lblWord.set((" ".join("_"*len(word))))
-    hangman_game.create_text(550,250,text=lblWord.get(),font=("Consolas 24 bold"))
+    guessing = hangman_game.create_text(550,300,text=lblWord.get(),font=("Consolas 24 bold"))
     
     
     photos = [PhotoImage(file="h1.png"), PhotoImage(file="h2.png"), PhotoImage(file="h3.png"), PhotoImage(file="h4.png"),
@@ -176,42 +170,54 @@ def hangman():
     btnZ.place(x=690, y=600)
     btnl = Button(game_window,image=bg_light,anchor="center",width=60,height=65)
     btnl.place(x=17, y=610)
-    btnskip = Button(game_window,image=bg_skip,anchor="center",width=52,height=52)
+    btnskip = Button(game_window,image=bg_skip,anchor="center",width=52,height=52,command=lambda:skip())
     btnskip.place(x=840, y=610)
     
     
     def guess(letter):
         global count
+        global user_score
+        global user_name
         
         if count<6:
             txt=list(the_word_withSpaces)
             guessed=list(lblWord.get())
+            print(the_word_withSpaces)
             if the_word_withSpaces.count(letter)>0:
                 for c in range(len(txt)):
                     if txt[c]==letter:
                         guessed[c]=letter
                         lblWord.set(("".join(guessed)))
+                        hangman_game.itemconfig(guessing,text=(lblWord.get()).upper())
+                    if lblWord.get()==the_word_withSpaces:
+                        game_window.destroy()
+                        user_score += wordscore
+                        count = 0
+                        hangman()
             else:
                 count+=1
                 hangman_game.itemconfig(picture,image=photos[count])
+                if count==6:
+                    with open('score.txt','a') as file:
+                        file.writelines(f'{user_name}  Score: {str(user_score)}\n')
+                        file.close()
+                    user_score = 0
+                    user_name = ''
+                    count = 0
+                    game_window.destroy()
+                    mainGUI.deiconify()
                 
     
     def word_on(button):
         button.place_forget()
         my_text = button['text'].lower()
         guess(my_text) 
-    
-# def show_word(alphabet):
-#     global word
-#     global count
-    
-#     for i in range(len(word)):
-#         if alphabet == word[i]:
-#             exec('hangman_game.itemconfig(guess{},text=str(alphabet))'.format(i))
-#         else:
-#             count+=1
-                       
-    
+
+    def skip():
+        game_window.destroy()
+        hangman()
+        
+
 def random_word():
     global wordscore
     global word
@@ -261,14 +267,6 @@ def random_word():
     print("index:" , index)
     print(word)
     
-########################################################
-# def word_on(alphabet):
-#     global word
-#     exec('btn{}.place_forget()'.format(alphabet))
-#     if alphabet in word:
-#         exec('hangman_game.create_text(500+(len(word)*30),250,text="{}",font=(None,25))'.format(alphabet))
-        
-
 
 
 mainGUI = Tk()                                                           
